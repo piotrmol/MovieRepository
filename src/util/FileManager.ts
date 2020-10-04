@@ -15,7 +15,7 @@ class FileManagerImpl<T> implements FileManager<T> {
     readContentOfFile(): Promise<T> {
         return new Promise((resolve, reject) => {
             fs.readFile(this.fileUrl, (error: NodeJS.ErrnoException, data: Buffer) => {
-                if (error) {
+                if(error) {
                     reject(error.message);
                 } else {
                     const object: T = JSON.parse(data.toString());
@@ -29,11 +29,11 @@ class FileManagerImpl<T> implements FileManager<T> {
         const json = JSON.stringify(object);
         return new Promise((resolve, reject) => {
             fs.writeFile(this.fileUrl, json, (error: NodeJS.ErrnoException) => {
-                if (error) {
+                if(error) {
                     reject(error.message);
                 } else {
                     resolve();
-                } 
+                }
             });
         });
     }
