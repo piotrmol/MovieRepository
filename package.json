@@ -14,6 +14,7 @@
   "author": "Piotr Mol",
   "license": "ISC",
   "dependencies": {
+    "class-validator": "^0.12.2",
     "express": "^4.17.1"
   },
   "devDependencies": {
