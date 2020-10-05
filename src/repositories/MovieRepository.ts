@@ -3,7 +3,7 @@ import MovieDatabase from "../models/MovieDatabase";
 import { FileManager, FileManagerImpl } from "../utils/FileManager";
 
 interface MovieRepository {
-    saveMovie(movie: Movie);
+    saveMovie(movie: Movie): Promise<void>;
     getAllMovies();
     getAllGeneres(): string[];
 }
@@ -24,8 +24,19 @@ class MovieRepositoryImpl implements MovieRepository {
             });
     }
 
-    saveMovie(movie: Movie) {
-
+    async saveMovie(movie: Movie): Promise<void> {
+        return new Promise(async (resolve, rejects) => {
+            const tempDatabase = this.movieDatabse;
+            movie.id = this.getNextMovieId();
+            tempDatabase.movies.push(movie);
+            try {
+                await this.fileManager.saveObjectToFile(tempDatabase);
+                this.movieDatabse = tempDatabase;
+                resolve();
+            } catch(error) {
+                rejects("Cannot save movie");
+            }
+        }); 
     }
 
     getAllMovies() {
@@ -34,6 +45,10 @@ class MovieRepositoryImpl implements MovieRepository {
 
     getAllGeneres(): string[] {
         return this.movieDatabse.genres;
+    }
+
+    private getNextMovieId(): number {
+        return this.movieDatabse.movies[this.movieDatabse.movies.length -1].id + 1;
     }
     
 }
