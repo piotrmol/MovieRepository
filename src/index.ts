@@ -5,9 +5,12 @@ import AppError from "./models/AppError";
 import { MovieRepositoryImpl } from "./repositories/MovieRepository";
 import AppRouter from "./routes/AppRouter";
 import { MovieServiceImpl } from "./services/MovieService";
+import { MovieValidatorImpl } from "./utils/MovieValidator";
+import bodyParser from "body-parser";
 
 const PORT = 3000;
 const app = express();
+app.use(bodyParser.json());
 
 (async => {
     app.get("/", (req: Request, resp: Response) => {
@@ -17,7 +20,7 @@ const app = express();
     // To refactor, apply DI
     const url = `${process.cwd()}/static/db.json`;
     const repository = new MovieRepositoryImpl(url);
-    const service = new MovieServiceImpl(repository);
+    const service = new MovieServiceImpl(repository, new MovieValidatorImpl());
     const controller = new MoviewController(service);
     // *********
     
