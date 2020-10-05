@@ -11,6 +11,7 @@ export default class AppRouter {
 
     setupRoutes() {
         this.router.get("/genres", this.movieController.getGenres.bind(this.movieController));
+        this.router.post("/movie", this.movieController.saveMovie.bind(this.movieController));
     }
 
 }
