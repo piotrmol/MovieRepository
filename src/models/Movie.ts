@@ -1,37 +1,52 @@
-import { IsNotEmpty, MaxLength } from "class-validator";
+import { IsDefined, IsNotEmpty, MaxLength } from "class-validator";
 
 export default class Movie {
 
     id: number;
 
     @IsNotEmpty({
-        message: "Title is required"
+        message: "Title cannot be empty",
+    })
+    @IsDefined({
+        message: "Title is required",
     })
     @MaxLength(255, {
-        message: "Title cannot be longer than 255 characters"
+        message: "Title cannot be longer than 255 characters",
     })
     title: string;
 
     @IsNotEmpty({
-        message: "Year is required"
+        message: "Year cannot be empty",
+    })
+    @IsDefined({
+        message: "Year is required",
     })
     year: number;
 
     @IsNotEmpty({
-        message: "Runtime is required"
+        message: "Runtime cannot be empty",
+    })
+    @IsDefined({
+        message: "Runtime is required",
     })
     runtime: number;
 
     @IsNotEmpty({
-        message: "Genres is required"
+        message: "Genres cannot be empty",
+    })
+    @IsDefined({
+        message: "Genres are required",
     })
     genres: string[];
 
     @IsNotEmpty({
-        message: "Director is required"
+        message: "Director cannot be empty",
+    })
+    @IsDefined({
+        message: "Director is required",
     })
     @MaxLength(255, {
-        message: "Director cannot be longer than 255 characters"
+        message: "Director cannot be longer than 255 characters",
     })
     director: string;
 
