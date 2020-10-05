@@ -1,5 +1,5 @@
-import { FileManager, FileManagerImpl } from "../../src/util/FileManager";
-import Movie from "../../src/model/Movie";
+import { FileManagerImpl } from "../../src/utils/FileManager";
+import Movie from "../../src/models/Movie";
 import os from "os";
 
 const fsify = require("fsify")({
@@ -8,7 +8,14 @@ const fsify = require("fsify")({
     force: true
 });
 
-const data = new Movie(1, "test title", "test year", 123, [], "test director");
+const data = new Movie();
+data.id = 1;
+data.title = "test title";
+data.runtime = 123;
+data.year = 123;
+data.genres = [];
+data.director = "test director";
+
 const structure = [
     {
         type: fsify.FILE,
@@ -37,6 +44,7 @@ test('Reading file', async () => {
     expect(movie.id).toBe(data.id);
     expect(movie.title).toBe(data.title);
     expect(movie.runtime).toBe(data.runtime);
+    expect(movie.year).toBe(data.year);
     expect(movie.genres.length).toBe(0);
     expect(movie.director).toBe(data.director);
 });

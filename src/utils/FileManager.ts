@@ -1,4 +1,3 @@
-import { rejects } from "assert";
 import fs from "fs";
 
 interface FileManager<T> {

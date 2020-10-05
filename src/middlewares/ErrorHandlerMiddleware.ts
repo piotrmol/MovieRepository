@@ -1,5 +1,5 @@
 import { Response } from "express";
-import AppError from "../model/AppError";
+import AppError from "../models/AppError";
 
 export const handleError = (error: AppError | Error, resp: Response)  => {
     let message = "Internal server error";
