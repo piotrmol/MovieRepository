@@ -1,0 +1,105 @@
+[{
+    "id": 1,
+    "year": "1988",
+    "runtime": "92",
+    "genres": [
+        "Comedy",
+        "Fantasy"
+    ],
+    "director": "Tim Burton",
+    "actors": "Alec Baldwin, Geena Davis, Annie McEnroe, Maurice Page",
+    "plot": "A couple of recently deceased ghosts contract the services of a \"bio-exorcist\" in order to remove the obnoxious new owners of their house.",
+    "posterUrl": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTUwODE3MDE0MV5BMl5BanBnXkFtZTgwNTk1MjI4MzE@._V1_SX300.jpg"
+},
+{
+    "id": 2,
+    "title": "Beetlejuice",
+    "runtime": "92",
+    "genres": [
+        "Comedy",
+        "Fantasy"
+    ],
+    "director": "Tim Burton",
+    "actors": "Alec Baldwin, Geena Davis, Annie McEnroe, Maurice Page",
+    "plot": "A couple of recently deceased ghosts contract the services of a \"bio-exorcist\" in order to remove the obnoxious new owners of their house.",
+    "posterUrl": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTUwODE3MDE0MV5BMl5BanBnXkFtZTgwNTk1MjI4MzE@._V1_SX300.jpg"
+},
+{
+    "id": 3,
+    "title": "Beetlejuice",
+    "year": "1988",
+    "genres": [
+        "Comedy",
+        "Fantasy"
+    ],
+    "director": "Tim Burton",
+    "actors": "Alec Baldwin, Geena Davis, Annie McEnroe, Maurice Page",
+    "plot": "A couple of recently deceased ghosts contract the services of a \"bio-exorcist\" in order to remove the obnoxious new owners of their house.",
+    "posterUrl": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTUwODE3MDE0MV5BMl5BanBnXkFtZTgwNTk1MjI4MzE@._V1_SX300.jpg"
+},
+{
+    "id": 4,
+    "title": "Beetlejuice",
+    "year": "1988",
+    "runtime": "92",
+    "director": "Tim Burton",
+    "actors": "Alec Baldwin, Geena Davis, Annie McEnroe, Maurice Page",
+    "plot": "A couple of recently deceased ghosts contract the services of a \"bio-exorcist\" in order to remove the obnoxious new owners of their house.",
+    "posterUrl": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTUwODE3MDE0MV5BMl5BanBnXkFtZTgwNTk1MjI4MzE@._V1_SX300.jpg"
+},
+{
+    "id": 5,
+    "title": "Beetlejuice",
+    "year": "1988",
+    "runtime": "92",
+    "genres": [
+        "Comedy",
+        "Fantasy",
+        "InvalidOne"
+    ],
+    "director": "Tim Burton",
+    "actors": "Alec Baldwin, Geena Davis, Annie McEnroe, Maurice Page",
+    "plot": "A couple of recently deceased ghosts contract the services of a \"bio-exorcist\" in order to remove the obnoxious new owners of their house.",
+    "posterUrl": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTUwODE3MDE0MV5BMl5BanBnXkFtZTgwNTk1MjI4MzE@._V1_SX300.jpg"
+},
+{
+    "id": 6,
+    "title": "Beetlejuice",
+    "year": "1988",
+    "runtime": "92",
+    "genres": [
+        "Comedy",
+        "Fantasy"
+    ],
+    "actors": "Alec Baldwin, Geena Davis, Annie McEnroe, Maurice Page",
+    "plot": "A couple of recently deceased ghosts contract the services of a \"bio-exorcist\" in order to remove the obnoxious new owners of their house.",
+    "posterUrl": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTUwODE3MDE0MV5BMl5BanBnXkFtZTgwNTk1MjI4MzE@._V1_SX300.jpg"
+},
+{
+    "id": 7,
+    "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum ",
+    "year": "1988",
+    "runtime": "92",
+    "genres": [
+        "Comedy",
+        "Fantasy"
+    ],
+    "director": "Tim",
+    "actors": "Alec Baldwin, Geena Davis, Annie McEnroe, Maurice Page",
+    "plot": "A couple of recently deceased ghosts contract the services of a \"bio-exorcist\" in order to remove the obnoxious new owners of their house.",
+    "posterUrl": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTUwODE3MDE0MV5BMl5BanBnXkFtZTgwNTk1MjI4MzE@._V1_SX300.jpg"
+},
+{
+    "id": 8,
+    "title": "Beetlejuice",
+    "year": "1988",
+    "runtime": "92",
+    "genres": [
+        "Comedy",
+        "Fantasy"
+    ],
+    "director": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum ",
+    "actors": "Alec Baldwin, Geena Davis, Annie McEnroe, Maurice Page",
+    "plot": "A couple of recently deceased ghosts contract the services of a \"bio-exorcist\" in order to remove the obnoxious new owners of their house.",
+    "posterUrl": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTUwODE3MDE0MV5BMl5BanBnXkFtZTgwNTk1MjI4MzE@._V1_SX300.jpg"
+}]
