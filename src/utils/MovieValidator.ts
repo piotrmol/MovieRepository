@@ -1,5 +1,5 @@
 import Movie from "../models/Movie";
-import {Validator} from "class-validator";
+import { Validator } from "class-validator";
 
 interface MovieValidator {
     validate(movie: Movie, genres: string[]): Promise<void>;

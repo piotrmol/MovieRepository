@@ -1,6 +1,6 @@
 import Movie from "../models/Movie"
 import MovieDatabase from "../models/MovieDatabase";
-import { FileManager, FileManagerImpl } from "../utils/FileManager";
+import { FileManager } from "../utils/FileManager";
 
 interface MovieRepository {
     saveMovie(movie: Movie): Promise<void>;
@@ -11,10 +11,8 @@ interface MovieRepository {
 class MovieRepositoryImpl implements MovieRepository {
     
     private movieDatabse: MovieDatabase = new MovieDatabase();
-    private fileManager: FileManager<MovieDatabase>;
 
-    constructor(private dbUrl: string) {
-        this.fileManager = new FileManagerImpl(dbUrl);
+    constructor(private fileManager: FileManager<MovieDatabase>) {
         this.fileManager.readContentOfFile()
             .then((db: MovieDatabase) => {
                 this.movieDatabse = db;

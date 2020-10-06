@@ -7,6 +7,7 @@ import AppRouter from "./routes/AppRouter";
 import { MovieServiceImpl } from "./services/MovieService";
 import { MovieValidatorImpl } from "./utils/MovieValidator";
 import bodyParser from "body-parser";
+import ControllerContainer from "./containters/ControllersContainer";
 
 const PORT = 3000;
 const app = express();
@@ -16,15 +17,8 @@ app.use(bodyParser.json());
     app.get("/", (req: Request, resp: Response) => {
         resp.send("Hello The Software house");
     });
-    
-    // To refactor, apply DI
-    const url = `${process.cwd()}/static/db.json`;
-    const repository = new MovieRepositoryImpl(url);
-    const service = new MovieServiceImpl(repository, new MovieValidatorImpl());
-    const controller = new MoviewController(service);
-    // *********
-    
-    const router = new AppRouter(controller);
+
+    const router = new AppRouter(ControllerContainer.getMovieController());
     router.setupRoutes();
     
     app.use(router.router);
