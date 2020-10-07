@@ -3,8 +3,8 @@ import ServiceContainer from "./ServicesContainer";
 
 export default class ControllerContainer {
 
-    static async getMovieController(): Promise<MovieController> {
-        const service = await ServiceContainer.getMovieService();
+    static getMovieController(): MovieController {
+        const service = ServiceContainer.getMovieService();
         return new MovieController(service);
     }
 
