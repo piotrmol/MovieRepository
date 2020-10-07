@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import MovieDatabase from "../models/MovieDatabase";
 import { MovieRepository, MovieRepositoryImpl } from "../repositories/MovieRepository";
 import UtilsContainer from "./UtilsContainer";

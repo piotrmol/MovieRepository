@@ -4,7 +4,7 @@ import { FileManager } from "../utils/FileManager";
 
 interface MovieRepository {
     saveMovie(movie: Movie): Promise<void>;
-    getAllMovies();
+    getAllMovies(): Movie[];
     getAllGeneres(): string[];
 }
 
@@ -13,18 +13,12 @@ class MovieRepositoryImpl implements MovieRepository {
     private movieDatabse: MovieDatabase = new MovieDatabase();
 
     constructor(private fileManager: FileManager<MovieDatabase>) {
-        this.fileManager.readContentOfFile()
-            .then((db: MovieDatabase) => {
-                this.movieDatabse = db;
-                console.log("Database connected");
-            }).catch((error: Error) => {
-                console.log(error);
-            });
+        this.setupDatabase();
     }
-
+    
     async saveMovie(movie: Movie): Promise<void> {
         return new Promise(async (resolve, rejects) => {
-            const tempDatabase = this.movieDatabse;
+            const tempDatabase = {genres: [...this.movieDatabse.genres], movies: [...this.movieDatabse.movies]};
             movie.id = this.getNextMovieId();
             tempDatabase.movies.push(movie);
             try {
@@ -37,12 +31,25 @@ class MovieRepositoryImpl implements MovieRepository {
         }); 
     }
 
-    getAllMovies() {
-
+    getAllMovies(): Movie[] {
+        return this.movieDatabse.movies;
     }
 
     getAllGeneres(): string[] {
         return this.movieDatabse.genres;
+    }
+
+    private setupDatabase() {
+        const movieDatabse = this.fileManager.readContentOfFile();
+
+        if (movieDatabse) {
+            this.movieDatabse = movieDatabse;
+            console.log("Connected to database");
+        } else {
+            console.log("Cannot connect to database");
+            // TODO exit process in production mode
+            //process.exit(0);
+        }
     }
 
     private getNextMovieId(): number {

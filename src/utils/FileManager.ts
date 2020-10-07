@@ -1,27 +1,26 @@
 import fs from "fs";
+import AppError from "../models/AppError";
 
 interface FileManager<T> {
     readonly fileUrl: string;
 
-    readContentOfFile(): Promise<T>;
+    readContentOfFile(): T | null;
     saveObjectToFile(object: T): Promise<void>;
 }
 
 class FileManagerImpl<T> implements FileManager<T> {
 
     constructor(readonly fileUrl: string) {}
-
-    readContentOfFile(): Promise<T> {
-        return new Promise((resolve, reject) => {
-            fs.readFile(this.fileUrl, (error: NodeJS.ErrnoException, data: Buffer) => {
-                if(error) {
-                    reject(error.message);
-                } else {
-                    const object: T = JSON.parse(data.toString());
-                    resolve(object);
-                }
-            });
-        });
+    
+    readContentOfFile(): T | null {
+        try {
+            const data = fs.readFileSync(this.fileUrl);
+            const object: T = JSON.parse(data.toString());
+            return object;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
     }
 
     saveObjectToFile(object: T): Promise<void> {
