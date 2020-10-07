@@ -12,14 +12,12 @@ class MovieRepositoryImpl implements MovieRepository {
     
     private movieDatabse: MovieDatabase = new MovieDatabase();
 
-    constructor(private fileManager: FileManager<MovieDatabase>) {
-        this.fileManager.readContentOfFile()
-            .then((db: MovieDatabase) => {
-                this.movieDatabse = db;
-                console.log("Database connected");
-            }).catch((error: Error) => {
-                console.log(error);
-            });
+    constructor(private fileManager: FileManager<MovieDatabase>) {}
+
+    static async createMovieRepository(fileManager: FileManager<MovieDatabase>): Promise<MovieRepository> {
+        const repository  = new MovieRepositoryImpl(fileManager);
+        await repository.setupDatabase();
+        return repository;
     }
 
     async saveMovie(movie: Movie): Promise<void> {
@@ -43,6 +41,17 @@ class MovieRepositoryImpl implements MovieRepository {
 
     getAllGeneres(): string[] {
         return this.movieDatabse.genres;
+    }
+
+    private async setupDatabase() {
+        try {
+            const movieDatabse = await this.fileManager.readContentOfFile();
+            console.log("Database connected");
+        } catch (error) {
+            console.log("Cannot connect to database");
+            console.log(error);
+            process.exit(0);
+        }
     }
 
     private getNextMovieId(): number {

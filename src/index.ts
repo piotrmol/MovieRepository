@@ -13,12 +13,13 @@ const PORT = 3000;
 const app = express();
 app.use(bodyParser.json());
 
-(async => {
+(async () => {
     app.get("/", (req: Request, resp: Response) => {
         resp.send("Hello The Software house");
     });
 
-    const router = new AppRouter(ControllerContainer.getMovieController());
+    const movieController = await ControllerContainer.getMovieController();
+    const router = new AppRouter(movieController);
     router.setupRoutes();
     
     app.use(router.router);

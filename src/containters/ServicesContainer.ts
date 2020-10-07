@@ -4,8 +4,8 @@ import UtilsContainer from "./UtilsContainer";
 
 export default class ServiceContainer {
 
-    static getMovieService(): MovieService {
-        const repository = RepositoryContainer.getMovieRepository();
+    static async getMovieService(): Promise<MovieService> {
+        const repository = await RepositoryContainer.getMovieRepository();
         const validator = UtilsContainer.getMovieValidator();
         return new MovieServiceImpl(repository, validator);
     }
