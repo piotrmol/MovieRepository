@@ -36,7 +36,7 @@ describe("FileManager tests", () => {
         const fileUrl = "fakeUrl";
         const fileManager = new FileManagerImpl<Movie>(fileUrl);
 
-        expect(fileManager.readContentOfFile()).rejects.toMatch("ENOENT: no such file or directory, open 'fakeUrl'");
+        expect(fileManager.readContentOfFile()).toBeNull();
     });
 
     const structure = [

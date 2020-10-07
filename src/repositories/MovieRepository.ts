@@ -4,7 +4,7 @@ import { FileManager } from "../utils/FileManager";
 
 interface MovieRepository {
     saveMovie(movie: Movie): Promise<void>;
-    getAllMovies();
+    getAllMovies(): Movie[];
     getAllGeneres(): string[];
 }
 
@@ -12,17 +12,13 @@ class MovieRepositoryImpl implements MovieRepository {
     
     private movieDatabse: MovieDatabase = new MovieDatabase();
 
-    constructor(private fileManager: FileManager<MovieDatabase>) {}
-
-    static async createMovieRepository(fileManager: FileManager<MovieDatabase>): Promise<MovieRepository> {
-        const repository  = new MovieRepositoryImpl(fileManager);
-        await repository.setupDatabase();
-        return repository;
+    constructor(private fileManager: FileManager<MovieDatabase>) {
+        this.setupDatabase();
     }
-
+    
     async saveMovie(movie: Movie): Promise<void> {
         return new Promise(async (resolve, rejects) => {
-            const tempDatabase = this.movieDatabse;
+            const tempDatabase = {genres: [...this.movieDatabse.genres], movies: [...this.movieDatabse.movies]};
             movie.id = this.getNextMovieId();
             tempDatabase.movies.push(movie);
             try {
@@ -35,22 +31,24 @@ class MovieRepositoryImpl implements MovieRepository {
         }); 
     }
 
-    getAllMovies() {
-
+    getAllMovies(): Movie[] {
+        return this.movieDatabse.movies;
     }
 
     getAllGeneres(): string[] {
         return this.movieDatabse.genres;
     }
 
-    private async setupDatabase() {
-        try {
-            const movieDatabse = await this.fileManager.readContentOfFile();
-            console.log("Database connected");
-        } catch (error) {
+    private setupDatabase() {
+        const movieDatabse = this.fileManager.readContentOfFile();
+
+        if (movieDatabse) {
+            this.movieDatabse = movieDatabse;
+            console.log("Connected to database");
+        } else {
             console.log("Cannot connect to database");
-            console.log(error);
-            process.exit(0);
+            // TODO exit process in production mode
+            //process.exit(0);
         }
     }
 

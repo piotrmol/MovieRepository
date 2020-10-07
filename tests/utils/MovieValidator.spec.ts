@@ -12,11 +12,11 @@ describe("MovieValidator tests", () => {
         movie.director = "director";
         movie.genres = ["Comedy", "Drama"];
 
-        expect(validator.validate(movie, genres)).resolves.not.toThrow();
+        await expect(validator.validate(movie, genres)).resolves.not.toThrow();
     });  
     
     it("Fails eight times with provided error messages", async () => {
-        const movies = await getInvalidMovies();
+        const movies = getInvalidMovies();
         expect(movies.length).toBe(8);
 
         movies.forEach((movie) => {
@@ -27,7 +27,7 @@ describe("MovieValidator tests", () => {
     const genres = ["Comedy", "Drama", "Science-Fiction"];
     const validator = UtilsContainer.getMovieValidator();
 
-    const getInvalidMovies = ():Promise< Movie[]> => {
+    const getInvalidMovies = (): Movie[] => {
         const url = path.join(__dirname, "../Mocks/Json/InvalidMovies.json");
         const fileManager = UtilsContainer.getFileManager<Movie[]>(url);
         return fileManager.readContentOfFile();

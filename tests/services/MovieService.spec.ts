@@ -1,7 +1,7 @@
 import Movie from "../../src/models/Movie";
 import { MovieService, MovieServiceImpl } from "../../src/services/MovieService";
 import { MockedMovieRepository } from "../Mocks/MockedMovieRepository";
-import { MockedMovieValidator } from "../Mocks/MockedMoviewValidator";
+import { MockedMovieValidator } from "../Mocks/MockedMovieValidator";
 
 describe("MovieService tests", () => {
 

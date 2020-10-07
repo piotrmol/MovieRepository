@@ -6,8 +6,8 @@ export const MockedMovieRepository = jest.fn<MovieRepository, any>((shouldFail: 
         return shouldFail ? Promise.reject("I/O exception") : Promise.resolve();
     },
 
-    getAllMovies() {
-
+    getAllMovies(): Movie[] {
+        return [];
     },
 
     getAllGeneres(): string[] {
