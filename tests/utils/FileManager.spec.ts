@@ -23,7 +23,7 @@ describe("FileManager tests", () => {
         const data = getMovie();
         await fileManager.saveObjectToFile(data);
 
-        const movie = await fileManager.readContentOfFile();
+        const movie = fileManager.readContentOfFile();
         expect(movie.id).toBe(data.id);
         expect(movie.title).toBe(data.title);
         expect(movie.runtime).toBe(data.runtime);

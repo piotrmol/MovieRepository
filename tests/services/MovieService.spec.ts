@@ -5,19 +5,19 @@ import { MockedMovieValidator } from "../Mocks/MockedMovieValidator";
 
 describe("MovieService tests", () => {
 
-    it("Throws validation error", () => {
+    it("Throws validation error", async () => {
         const service = getService(false, true);
         const movie = getMovie();
         movie.title = null;
 
-        expect(service.saveMovie(movie)).rejects.toThrow("Title is required");
+        await expect(service.saveMovie(movie)).rejects.toThrow("Title is required");
     });
 
-    it("Throws repository error", () => {
+    it("Throws repository error", async () => {
         const service = getService(true, false);
         const movie = getMovie();
 
-        expect(service.saveMovie(movie)).rejects.toThrow("I/O exception");
+        await expect(service.saveMovie(movie)).rejects.toThrow("I/O exception");
     });
 
     it("Saves movie. Nothing is returned", () => {

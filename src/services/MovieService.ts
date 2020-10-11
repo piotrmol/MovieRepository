@@ -6,6 +6,7 @@ import { MovieValidator } from "../utils/MovieValidator";
 interface MovieService {
     saveMovie(requestBody: any);
     getAllGenres(): string[];
+    getMoviesMatching(genres?: string[], duration?: number): Set<Movie>;
 }
 
 class MovieServiceImpl implements MovieService {
@@ -30,6 +31,11 @@ class MovieServiceImpl implements MovieService {
 
     getAllGenres(): string[] {
         return this.repository.getAllGeneres();
+    }
+
+    getMoviesMatching(genres?: string[], duration?: number): Set<Movie> {
+        
+        return new Set();
     }
 
     private getMovieFromBody(requestBody: any): Movie {
