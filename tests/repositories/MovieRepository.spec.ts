@@ -19,19 +19,19 @@ describe('Tests for persistence layer', () => {
     it("Throws save movie error. Number of movies doesn't change", async () => {
         const mockedFileManager = new MockedFileManager(false, true);
         const repository = new MovieRepositoryImpl(mockedFileManager);
-        expect(repository.getAllMovies().length).toBe(2);
+        expect(repository.getAllMovies().length).toBe(4);
 
         await expect(repository.saveMovie(movie)).rejects.toBe("Cannot save movie");
-        expect(repository.getAllMovies().length).toBe(2);
+        expect(repository.getAllMovies().length).toBe(4);
     });
 
     it("Saves movie. Number of movies changes", async () => {
         const mockedFileManager = new MockedFileManager(false, false);
         const repository = new MovieRepositoryImpl(mockedFileManager);
-        expect(repository.getAllMovies().length).toBe(2);
+        expect(repository.getAllMovies().length).toBe(4);
 
         await expect(repository.saveMovie(movie)).resolves.toBe(undefined);
-        expect(repository.getAllMovies().length).toBe(3);
+        expect(repository.getAllMovies().length).toBe(5);
     });
 
 });
