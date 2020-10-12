@@ -5,7 +5,24 @@ interface MovieFinder {
     findMovies(...args): Set<Movie>;
 }
 
-class GenresAndDurationMovieFinder {
+class GenresAndDurationMovieFinder implements MovieFinder {
+
+    findMovies(movies: Movie[], genres: string[], duration: number): Set<Movie> {
+        if(genres.length === 0) {
+            return new Set();
+        }
+        
+        const bestMatches = movies.filter((movie) => {
+            const machedGenres = genres.every(gen => movie.genres.includes(gen));
+            return movie.runtime >= duration -10 && movie.runtime <= duration + 10 && machedGenres;
+        });
+        
+        const genresMovieFinder = new GenresMovieFinder();
+        const genresMaches = genresMovieFinder.findMovies(movies, genres);
+        const machedMovies = [...bestMatches, ...genresMaches];
+
+        return new Set<Movie>(machedMovies);
+    }
 
 }
 
