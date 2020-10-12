@@ -52,7 +52,7 @@ class GenresMovieFinder implements MovieFinder {
         genresQueue.push(genres);
         
         while(!genresQueue.isEmpty()) {
-            const subGenres = this.getAllGenresCombinationV2(genresQueue.pop());
+            const subGenres = this.getAllGenresConbinations(genresQueue.pop());
             subGenres.forEach(subGenresArr => {
                 result.push(subGenresArr);
                 if (subGenresArr.length > 1) {
@@ -64,7 +64,7 @@ class GenresMovieFinder implements MovieFinder {
         return this.getUniqueCombinations(result);
     }
 
-    private getAllGenresCombinationV2(genres: string[]): Array<Array<string>> {
+    private getAllGenresConbinations(genres: string[]): Array<Array<string>> {
         const result = new Array<Array<string>>();
 
         if (genres.length === 0){
@@ -93,11 +93,29 @@ class GenresMovieFinder implements MovieFinder {
 
 }
 
-class DurationMovieFinder {
+class DurationMovieFinder implements MovieFinder {
+
+    findMovies(movies: Movie[], duration: number): Set<Movie> {
+        const result = new Set<Movie>();
+        const mached = movies.filter(movie => movie.runtime >= duration - 10 &&  movie.runtime <= duration + 10 );
+        const randomMovie = mached[Math.floor(Math.random() * mached.length)];
+        
+        if (randomMovie) {
+            result.add(randomMovie);
+        }
+
+        return result;
+    }
 
 }
 
-class RandomMovieFinder {
+class RandomMovieFinder implements MovieFinder{
+
+    findMovies(movies: Movie[]): Set<Movie> {
+        const randomMovie = movies[Math.floor(Math.random() * movies.length)];
+
+        return new Set<Movie>().add(randomMovie);
+    }
     
 }
 
