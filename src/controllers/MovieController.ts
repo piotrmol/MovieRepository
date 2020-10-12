@@ -17,7 +17,20 @@ export default class MovieController {
     }
 
     async getMovies(req: Request, resp: Response, next: NextFunction) {
+        let genres: string[];
+        let duration: number;
+        
+        const genresQuery = req.query.genres as string;
+        const durationQuery = req.query.duration as string;
+        if (genresQuery) {
+            genres = genresQuery.split(",");
+        }
+        if(durationQuery) {
+            duration = parseInt(durationQuery);
+        }
 
+        const movies = this.service.getMatchingMovies(genres, duration);
+        resp.status(200).json(movies);
     }
 
     async getGenres(req: Request, resp: Response, next: NextFunction) {

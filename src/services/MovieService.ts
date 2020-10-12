@@ -1,12 +1,13 @@
 import AppError from "../models/AppError";
 import Movie from "../models/Movie";
 import { MovieRepository } from "../repositories/MovieRepository";
+import { DurationMovieFinder, GenresAndDurationMovieFinder, GenresMovieFinder, MovieFinder, RandomMovieFinder } from "../utils/MovieFinder";
 import { MovieValidator } from "../utils/MovieValidator";
 
 interface MovieService {
     saveMovie(requestBody: any);
     getAllGenres(): string[];
-    getMoviesMatching(genres?: string[], duration?: number): Set<Movie>;
+    getMatchingMovies(genres?: string[], duration?: number): Movie[];
 }
 
 class MovieServiceImpl implements MovieService {
@@ -33,9 +34,21 @@ class MovieServiceImpl implements MovieService {
         return this.repository.getAllGeneres();
     }
 
-    getMoviesMatching(genres?: string[], duration?: number): Set<Movie> {
+    getMatchingMovies(genres?: string[], duration?: number): Movie[] {
+        const movies = this.repository.getAllMovies();
+        let matchedMovies: Set<Movie>;
+
+        if (genres && duration) {
+            matchedMovies = new GenresAndDurationMovieFinder().findMovies(movies, genres, duration);
+        } else if (duration) {
+            matchedMovies = new DurationMovieFinder().findMovies(movies, duration);
+        } else if (genres) {
+            matchedMovies = new GenresMovieFinder().findMovies(movies, genres);
+        } else {
+            matchedMovies = new RandomMovieFinder().findMovies(movies);
+        }
         
-        return new Set();
+        return [...matchedMovies];
     }
 
     private getMovieFromBody(requestBody: any): Movie {
