@@ -10,6 +10,13 @@ const fsify = require("fsify")({
 });
 
 describe("FileManager tests", () => {
+
+    const structure = [
+        {
+            type: fsify.FILE,
+            name: `filename${new Date().getTime()}`
+        }
+    ];
     
     it('Saves object to file', async () => {
         const fileManager = await getFileManager();
@@ -39,13 +46,7 @@ describe("FileManager tests", () => {
         expect(fileManager.readContentOfFile()).toBeNull();
     });
 
-    const structure = [
-        {
-            type: fsify.FILE,
-            name: `filename${new Date().getTime()}`
-        }
-    ];
-    
+
     const getFileManager = async () => {
         const files = await fsify(structure);
         const fileUrl = files[0].name;

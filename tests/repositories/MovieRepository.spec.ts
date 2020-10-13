@@ -1,5 +1,5 @@
 import Movie from "../../src/models/Movie";
-import { MovieRepositoryImpl } from "../../src/repositories/MovieRepository";
+import { MovieRepository, MovieRepositoryImpl } from "../../src/repositories/MovieRepository";
 import { MockedFileManager } from "../Mocks/MockedFileManager";
 
 describe('Tests for persistence layer', () => {
@@ -17,8 +17,7 @@ describe('Tests for persistence layer', () => {
     });
 
     it("Throws save movie error. Number of movies doesn't change", async () => {
-        const mockedFileManager = new MockedFileManager(false, true);
-        const repository = new MovieRepositoryImpl(mockedFileManager);
+        const repository = getMovieRepository(false, true);
         expect(repository.getAllMovies().length).toBe(4);
 
         await expect(repository.saveMovie(movie)).rejects.toBe("Cannot save movie");
@@ -26,12 +25,32 @@ describe('Tests for persistence layer', () => {
     });
 
     it("Saves movie. Number of movies changes", async () => {
-        const mockedFileManager = new MockedFileManager(false, false);
-        const repository = new MovieRepositoryImpl(mockedFileManager);
+        const repository = getMovieRepository();
         expect(repository.getAllMovies().length).toBe(4);
 
         await expect(repository.saveMovie(movie)).resolves.toBe(undefined);
         expect(repository.getAllMovies().length).toBe(5);
     });
+
+    it("Returns list of four movies", () => {
+        const repository = getMovieRepository();
+        const movies = repository.getAllMovies();
+
+        expect(movies.length).toBe(4);
+        expect(movies[0].id).toBe(1);
+        expect(movies[0].title).toBe("Beetlejuice");
+    });
+
+    it("Returns list of twenty one genres", () => {
+        const repository = getMovieRepository();
+        const genres = repository.getAllGeneres();
+
+        expect(genres.length).toBe(21);
+    });
+
+    const getMovieRepository = (shouldFailReading: boolean = false, shouldFailWriting: boolean = false): MovieRepository => {
+        const mockedFileManager = new MockedFileManager(shouldFailReading, shouldFailWriting);
+        return new MovieRepositoryImpl(mockedFileManager);
+    };
 
 });
