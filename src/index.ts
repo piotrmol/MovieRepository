@@ -5,13 +5,15 @@ import AppRouter from "./routes/AppRouter";
 import bodyParser from "body-parser";
 import ControllerContainer from "./containters/ControllersContainer";
 import dotenv from "dotenv";
-
-
+import helmet from "helmet";
 
 dotenv.config();
 
 const PORT = process.env.PORT;
 const app = express();
+app.use(helmet({
+    hsts: false
+}));
 app.use(bodyParser.json());
 
 (() => {
