@@ -11,7 +11,7 @@ interface FileManager<T> {
 class FileManagerImpl<T> implements FileManager<T> {
 
     constructor(readonly fileUrl: string) {}
-    
+
     readContentOfFile(): T | null {
         try {
             const data = fs.readFileSync(this.fileUrl);
