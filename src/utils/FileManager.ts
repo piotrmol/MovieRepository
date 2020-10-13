@@ -18,7 +18,6 @@ class FileManagerImpl<T> implements FileManager<T> {
             const object: T = JSON.parse(data.toString());
             return object;
         } catch (error) {
-            console.log(error);
             return null;
         }
     }

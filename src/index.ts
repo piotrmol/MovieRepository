@@ -4,8 +4,13 @@ import AppError from "./models/AppError";
 import AppRouter from "./routes/AppRouter";
 import bodyParser from "body-parser";
 import ControllerContainer from "./containters/ControllersContainer";
+import dotenv from "dotenv";
 
-const PORT = 3000;
+
+
+dotenv.config();
+
+const PORT = process.env.PORT;
 const app = express();
 app.use(bodyParser.json());
 

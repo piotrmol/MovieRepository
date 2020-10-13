@@ -1,6 +1,9 @@
 import UtilsContainer from "../../src/containters/UtilsContainer";
 import Movie from "../../src/models/Movie";
 import path from "path";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 describe("MovieValidator tests", () => {
 
@@ -28,7 +31,7 @@ describe("MovieValidator tests", () => {
     });
 
     const getInvalidMovies = (): Movie[] => {
-        const url = path.join(__dirname, "../Mocks/Json/InvalidMovies.json");
+        const url = path.join(__dirname, "../../", process.env.INVALID_MOVIES_URL);
         const fileManager = UtilsContainer.getFileManager<Movie[]>(url);
         return fileManager.readContentOfFile();
     };
