@@ -5,9 +5,20 @@ import { MockedMovieValidator } from "../Mocks/MockedMovieValidator";
 
 describe("MovieService tests", () => {
 
+    let movie: Movie;
+
+    beforeAll(() => {
+        movie = new Movie();
+        movie.director = "director";
+        movie.genres = [];
+        movie.id = 1;
+        movie.runtime = 123;
+        movie.year = 123;
+        movie.title = "title";
+    });
+
     it("Throws validation error", async () => {
         const service = getService(false, true);
-        const movie = getMovie();
         movie.title = null;
 
         await expect(service.saveMovie(movie)).rejects.toThrow("Title is required");
@@ -15,15 +26,11 @@ describe("MovieService tests", () => {
 
     it("Throws repository error", async () => {
         const service = getService(true, false);
-        const movie = getMovie();
-
         await expect(service.saveMovie(movie)).rejects.toThrow("I/O exception");
     });
 
     it("Saves movie. Nothing is returned", () => {
         const service = getService(false, false);
-        const movie = getMovie();
-
         expect(service.saveMovie(movie)).resolves.toBe(undefined);
     });
 
@@ -41,17 +48,6 @@ describe("MovieService tests", () => {
         const repository = new MockedMovieRepository(shouldRepositoryFail);
         const validator = new MockedMovieValidator(shouldValidatorFail);
         return new MovieServiceImpl(repository, validator);
-    };
-
-    const getMovie = (): Movie => {
-        const movie = new Movie();
-        movie.director = "director";
-        movie.genres = [];
-        movie.id = 1;
-        movie.runtime = 123;
-        movie.year = 123;
-        movie.title = "title";
-        return movie;
     };
 
 });
