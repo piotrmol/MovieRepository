@@ -13,16 +13,16 @@ interface MovieService {
 class MovieServiceImpl implements MovieService {
 
     constructor(private repository: MovieRepository, private movieValidator: MovieValidator){}
-    
+
     async saveMovie(requestBody: any) {
         const movie = this.getMovieFromBody(requestBody);
-        
+
         try {
             await this.movieValidator.validate(movie, this.getAllGenres());
         } catch (validationError) {
             throw new AppError(validationError, 400);
         }
-        
+
         try {
             await this.repository.saveMovie(movie);
         } catch (writeError) {
@@ -47,7 +47,7 @@ class MovieServiceImpl implements MovieService {
         } else {
             matchedMovies = new RandomMovieFinder().findMovies(movies);
         }
-        
+
         return [...matchedMovies];
     }
 

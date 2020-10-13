@@ -24,14 +24,14 @@ app.use(bodyParser.json());
     const movieController = ControllerContainer.getMovieController();
     const router = new AppRouter(movieController);
     router.setupRoutes();
-    
+
     app.use(router.router);
-    
+
     // To working properly must be the last one middleware
     app.use((err: AppError | Error, req: Request, resp: Response, next: NextFunction) => {
         handleError(err, resp);
-    })
-    
+    });
+
     app.listen(PORT, () => {
         console.log(`Application is listening: http://localhost:${PORT}`);
     });

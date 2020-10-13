@@ -29,7 +29,7 @@ class MovieValidatorImpl implements MovieValidator {
             .map(el => genres.includes(el))
             .reduce((priev, next) => priev && next);
     }
-    
+
 }
 
 export { MovieValidator, MovieValidatorImpl }
