@@ -3,6 +3,9 @@ import Movie from "../../src/models/Movie";
 import path from "path";
 
 describe("MovieValidator tests", () => {
+
+    const genres = ["Comedy", "Drama", "Science-Fiction"];
+    const validator = UtilsContainer.getMovieValidator();
     
     it('Successfully validates movie', async () => {
         const movie = new Movie();
@@ -23,9 +26,6 @@ describe("MovieValidator tests", () => {
             expect(validator.validate(movie, genres)).rejects.toMatch(/required|are not valid|cannot be longer/);
         });
     });
-
-    const genres = ["Comedy", "Drama", "Science-Fiction"];
-    const validator = UtilsContainer.getMovieValidator();
 
     const getInvalidMovies = (): Movie[] => {
         const url = path.join(__dirname, "../Mocks/Json/InvalidMovies.json");
