@@ -26,7 +26,7 @@ describe("MovieFinder tests", () => {
             for(let i = 0; i < tests.length; i++) {
                 const movies = movieFinder.findMovies(movieDatabase.movies, tests[i].genres, tests[i].duration);
                 expect(movies.size).toBe(tests[i].length);
-    
+
                 const iterator = movies.values();
                 for(let j = 0; j < tests[i].ids.length; j++) {
                     const movie = iterator.next().value;
@@ -58,16 +58,16 @@ describe("MovieFinder tests", () => {
             for(let i = 0; i < tests.length; i++) {
                 const movies = movieFinder.findMovies(movieDatabase.movies, tests[i].genres);
                 expect(movies.size).toBe(tests[i].length);
-    
+
                 const iterator = movies.values();
                 for(let j = 0; j < tests[i].ids.length; j++) {
                     const movie = iterator.next().value;
                     expect(movie.id).toBe(tests[i].ids[j]);
                 }
             }
-    
+
         });
-    
+
         it("Returns empty set for no matches", () => {
             const movies = movieFinder.findMovies(movieDatabase.movies, ["NotExistingOne", "Tests", "123456668"]);
             expect(movies.size).toBe(0);

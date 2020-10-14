@@ -47,8 +47,6 @@ class MovieRepositoryImpl implements MovieRepository {
             console.log("Connected to database");
         } else {
             console.log("Cannot connect to database");
-            // TODO exit process in production mode
-            // process.exit(0);
         }
     }
 

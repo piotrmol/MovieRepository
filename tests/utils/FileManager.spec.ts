@@ -17,7 +17,7 @@ describe("FileManager tests", () => {
             name: `filename${new Date().getTime()}`
         }
     ];
-    
+
     it('Saves object to file', async () => {
         const fileManager = await getFileManager();
         const movie = await fileManager.saveObjectToFile(getMovie());
