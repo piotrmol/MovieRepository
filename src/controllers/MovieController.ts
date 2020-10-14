@@ -7,7 +7,6 @@ export default class MovieController {
 
     async saveMovie(req: Request, resp: Response, next: NextFunction) {
         try {
-            console.log(req);
             await this.service.saveMovie(req.body);
             resp.sendStatus(200);
             next();

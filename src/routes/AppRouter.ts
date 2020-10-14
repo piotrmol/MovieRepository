@@ -5,9 +5,7 @@ export default class AppRouter {
 
     router = Router();
 
-    constructor(
-        private movieController: MovieController
-    ) {}
+    constructor(private movieController: MovieController) {}
 
     setupRoutes() {
         this.router.get("/genres", this.movieController.getGenres.bind(this.movieController));

@@ -3,7 +3,7 @@ import { MovieRepository, MovieRepositoryImpl } from "../../src/repositories/Mov
 import { MockedFileManager } from "../Mocks/MockedFileManager";
 
 describe('Tests for persistence layer', () => {
-    
+
     let movie: Movie;
 
     beforeAll(() => {
