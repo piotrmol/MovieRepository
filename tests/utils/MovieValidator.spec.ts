@@ -9,7 +9,7 @@ describe("MovieValidator tests", () => {
 
     const genres = ["Comedy", "Drama", "Science-Fiction"];
     const validator = UtilsContainer.getMovieValidator();
-    
+
     it('Successfully validates movie', async () => {
         const movie = new Movie();
         movie.title = "title";
@@ -19,8 +19,8 @@ describe("MovieValidator tests", () => {
         movie.genres = ["Comedy", "Drama"];
 
         await expect(validator.validate(movie, genres)).resolves.not.toThrow();
-    });  
-    
+    });
+
     it("Fails eight times with provided error messages", async () => {
         const movies = getInvalidMovies();
         expect(movies.length).toBe(8);

@@ -1,5 +1,4 @@
 import fs from "fs";
-import AppError from "../models/AppError";
 
 interface FileManager<T> {
     readonly fileUrl: string;

@@ -1,7 +1,7 @@
 import AppError from "../models/AppError";
 import Movie from "../models/Movie";
 import { MovieRepository } from "../repositories/MovieRepository";
-import { DurationMovieFinder, GenresAndDurationMovieFinder, GenresMovieFinder, MovieFinder, RandomMovieFinder } from "../utils/MovieFinder";
+import { DurationMovieFinder, GenresAndDurationMovieFinder, GenresMovieFinder, RandomMovieFinder } from "../utils/MovieFinder";
 import { MovieValidator } from "../utils/MovieValidator";
 
 interface MovieService {

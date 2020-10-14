@@ -61,7 +61,7 @@ describe("MovieService tests", () => {
 
         const movies = service.getMatchingMovies(null, duration);
         const movieDuration = parseInt(movies[0].runtime as any);
-        
+
         expect(movies.length).toBe(1);
         expect([2,3]).toContain(movies[0].id);
         expect(movieDuration).toBeGreaterThanOrEqual(duration - 10);
@@ -73,7 +73,7 @@ describe("MovieService tests", () => {
         const genres = ["Comedy", "Crime"];
 
         const movies = service.getMatchingMovies(genres, null);
-        
+
         expect(movies.length).toBe(4);
         expect(movies[0].id).toBe(1);
         expect(movies[1].id).toBe(4);

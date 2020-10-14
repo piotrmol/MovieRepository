@@ -77,6 +77,7 @@ class GenresMovieFinder implements MovieFinder {
         let excluded = genres.length - 1;
         while (excluded !== -1) {
             const copy = [...genres];
+            copy.splice(excluded, 1);
             result.push(copy);
             excluded --;
         }
