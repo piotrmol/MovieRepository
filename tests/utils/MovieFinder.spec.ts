@@ -52,7 +52,7 @@ describe("MovieFinder tests", () => {
                 { genres: ['Comedy', 'Fantasy'], length: 2, ids: [1,4] },
                 { genres: ['Crime', 'Drama'], length: 2, ids: [2,3] },
                 { genres: ['Adventure'], length: 1, ids: [4] },
-                { genres: ['Comedy', 'Crime', 'Music'], length: 4, ids: [2,1,4,3] },
+                { genres: ['Comedy', 'Crime', 'Music'], length: 4, ids: [2,1,3,4] },
             ];
 
             for(let i = 0; i < tests.length; i++) {
