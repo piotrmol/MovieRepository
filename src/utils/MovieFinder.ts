@@ -1,5 +1,4 @@
 import Movie from "../models/Movie";
-import Queue from "../models/Queue";
 
 interface MovieFinder {
     findMovies(...args): Set<Movie>;
@@ -28,69 +27,41 @@ class GenresAndDurationMovieFinder implements MovieFinder {
 
 class GenresMovieFinder implements MovieFinder {
 
-    findMovies(movies: Movie[], genres: string[]): Set<Movie> {
-        const result = new Set<Movie>();
 
-        const genresCombination = this.getGenresCombination(genres);
+    findMovies(movies: Movie[], genres: string[]): Set<Movie>  {
+        const movieMaches = this.calculateMatchesPerMovie(movies, genres);
+        const sortedAndFilteredMatches = this.sortAndFilterMatches(movieMaches);
+        return new Set<Movie>(sortedAndFilteredMatches.map(match => match.movie));
+    }
 
-        genresCombination.forEach(combination => {
-            movies.forEach(movie => {
-                if (combination.every( el => movie.genres.includes(el))) {
-                    result.add(movie);
+    private calculateMatchesPerMovie(movies: Movie[], genres: string[]): GenresMovieFinder.MovieGenresMatch[] {
+        return movies.map(movie => {
+            let matches = 0;
+            for(const genre of genres) {
+                if( movie.genres.includes(genre)) {
+                    matches ++;
                 }
-            });
+            }
+            return new GenresMovieFinder.MovieGenresMatch(movie, matches);
         });
-
-        return result;
     }
 
-    private getGenresCombination(genres: string[]): string[][] {
-        const result: string[][] = [];
-        const genresQueue = new Queue<string[]>();
-
-        result.push(genres);
-        genresQueue.push(genres);
-
-        while(!genresQueue.isEmpty()) {
-            const subGenres = this.getAllGenresConbinations(genresQueue.pop());
-            subGenres.forEach(subGenresArr => {
-                result.push(subGenresArr);
-                if (subGenresArr.length > 1) {
-                    genresQueue.push(subGenresArr);
-                }
-            });
-        }
-
-        return this.getUniqueCombinations(result);
+    private sortAndFilterMatches(matches: GenresMovieFinder.MovieGenresMatch[]): GenresMovieFinder.MovieGenresMatch[] {
+        return matches
+            .filter(match => match.matches > 0)
+            .sort((priev, next) => next.matches - priev.matches);
     }
 
-    private getAllGenresConbinations(genres: string[]): string[][] {
-        const result: string[][] = [];
+}
 
-        if (genres.length === 0){
-            return result;
-        } else if (genres.length === 1) {
-            result.push(genres);
-            return result;
-        }
-
-        let excluded = genres.length - 1;
-        while (excluded !== -1) {
-            const copy = [...genres];
-            copy.splice(excluded, 1);
-            result.push(copy);
-            excluded --;
-        }
-
-        return result;
+namespace GenresMovieFinder {
+    export class MovieMatch {
+        constructor(public id: number, public matches: number) {}
     }
 
-    private getUniqueCombinations(combinations: string[][]): string[][] {
-        const set  = new Set<string>(combinations.map(arr => JSON.stringify(arr)));
-        const uniqueArray: string[][] = Array.from(set).map(arr => JSON.parse(arr));
-        return uniqueArray;
+    export class MovieGenresMatch {
+        constructor(public movie: Movie, public matches: number) {}
     }
-
 }
 
 class DurationMovieFinder implements MovieFinder {

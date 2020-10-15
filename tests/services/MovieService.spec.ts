@@ -76,9 +76,9 @@ describe("MovieService tests", () => {
 
         expect(movies.length).toBe(4);
         expect(movies[0].id).toBe(1);
-        expect(movies[1].id).toBe(4);
-        expect(movies[2].id).toBe(2);
-        expect(movies[3].id).toBe(3);
+        expect(movies[1].id).toBe(2);
+        expect(movies[2].id).toBe(3);
+        expect(movies[3].id).toBe(4);
     });
 
     it("Should gets list with single random movie for no paramters provided", () => {
