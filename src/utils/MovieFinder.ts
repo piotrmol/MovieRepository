@@ -1,5 +1,4 @@
 import Movie from "../models/Movie";
-import Queue from "../models/Queue";
 
 interface MovieFinder {
     findMovies(...args): Set<Movie>;
@@ -52,7 +51,7 @@ class GenresMovieFinder implements MovieFinder {
             .filter(match => match.matches > 0)
             .sort((priev, next) => next.matches - priev.matches);
     }
-    
+
 }
 
 namespace GenresMovieFinder {
