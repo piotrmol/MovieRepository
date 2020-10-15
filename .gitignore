@@ -6,4 +6,4 @@ tmp/
 temp/
 coverage/
 .env
-/database
+database/
