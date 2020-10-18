@@ -34,7 +34,7 @@ After installation app is running on http://localhost:3000
 ```
 http://localhost/3000/movie
 ```
-Two optional query paramiters can be provided:
+Two optional query parameters can be provided:
 - duration: how long the movie should be(given in minutes)
 - genres: list of genres separated by comas
 
@@ -51,7 +51,6 @@ http://localhost/3000:movie
 Requires json body. Model: 
 ```
 {
-  id: number;
   title: string;
   year: number;
   runtime: number;
